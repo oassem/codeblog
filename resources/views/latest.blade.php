@@ -7,7 +7,7 @@ Latest Posts
 @section('content')
 <div class='row mt-5'>
     @foreach($posts as $post)
-    <div class='col-lg-4'>
+    <div class='col-lg-4 mb-5'>
         <div class='item'>
             <div class="card" style="width: 18rem;">
                 <img src="<?php echo asset('images/' . $post->image) ?>" class="card-img-top" style="height:250px;">
