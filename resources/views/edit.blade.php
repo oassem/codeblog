@@ -18,10 +18,21 @@ Edit Post
         @error('body'){{$message}}@enderror
     </div>
     <div class="form-group mt-4">
+        <span class='text-primary'>Select tags</span><br>
+        @foreach($all_tags as $tag)
+        @if(in_array($tag->name, $tags))
+        <input type='checkbox' checked class='mr-2' name='tags[]' value='{{$tag->id}}'>{{$tag->name}}
+        @else
+        <input type='checkbox' class='mr-2' name='tags[]' value='{{$tag->id}}'>{{$tag->name}}
+        @endif
+        <span class='mr-4'></span>
+        @endforeach
+    </div>
+    <div class="form-group mt-5">
         <span class='text-primary'>Select image to upload</span><br><br>
         <input type="file" name="image">
         @error('image'){{$message}}@enderror
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Update</button>
+    <button type="submit" class="btn btn-primary mt-3 mb-5">Update</button>
 </form>
 @endsection

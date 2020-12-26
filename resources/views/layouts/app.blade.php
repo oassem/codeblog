@@ -8,7 +8,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
     <title>@yield('title')</title>
 </head>
 
@@ -30,6 +29,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('posts/create')}}">Create Post</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('tags/create')}}">Create Tag</a>
+                </li>
+                @if(Auth::check() and Auth::user()->is_admin==1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/logout')}}">Logout</a>
+                </li>
+                @endif
                 <form class="form-inline my-2 my-lg-0 ml-2" method="get" action="{{url('posts/search')}}">
                     <input class="form-control mr-sm-2" type="search" name='search' placeholder="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

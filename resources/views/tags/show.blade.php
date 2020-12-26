@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-List Of Posts
+{{$tag->name}} Posts
 @endsection
 
 @section('content')

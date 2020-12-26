@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -39,7 +40,8 @@ class PostController extends Controller
 
     function create()
     {
-        return view('create');
+        $tags = Tag::get();
+        return view('create', ['tags' => $tags]);
     }
 
     function store(Request $request)
@@ -62,12 +64,14 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->image = $img->getClientOriginalName();
         $post->save();
+        $post->tags()->attach($request->tags);
         return redirect('posts');
     }
 
     function delete($id)
     {
         $post = Post::find($id);
+        $post->tags()->detach();
         $post->delete();
         return redirect('posts');
     }
@@ -75,7 +79,13 @@ class PostController extends Controller
     function edit($id)
     {
         $post = Post::find($id);
-        return view('edit', ['post' => $post]);
+        $data = $post->tags()->get();
+        $tags = array();
+        foreach ($data as $d) {
+            array_push($tags, $d->name);
+        }
+        $all_tags = Tag::get();
+        return view('edit', ['post' => $post, 'tags' => $tags, 'all_tags' => $all_tags]);
     }
 
     function update($id, Request $request)
@@ -97,6 +107,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->image = $img->getClientOriginalName();
+        $post->tags()->sync($request->tags);
         $post->save();
         return redirect('posts');
     }

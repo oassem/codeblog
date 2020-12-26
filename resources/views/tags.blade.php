@@ -11,7 +11,10 @@ List Of Tags
         <div class='item'>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title mt-3">#{{$tag->name}}</h5>
+                    <a href="{{url('tags/show',$tag->id)}}">
+                        <h5 class="card-title mt-3">#{{$tag->name}}</h5>
+                    </a>
+                    <a href="{{url('tags/delete',$tag->id)}}" class="btn btn-light mt-3">Remove</a><br />
                 </div>
             </div>
         </div>

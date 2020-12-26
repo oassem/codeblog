@@ -18,10 +18,17 @@ Create Post
         @error('body'){{$message}}@enderror
     </div>
     <div class="form-group mt-4">
+        <span class='text-primary'>Select tags</span><br>
+        @foreach($tags as $tag)
+        <input type="checkbox" class="mr-2" name="tags[]" value="{{$tag->id}}">{{$tag->name}}
+        <span class='mr-4'></span>
+        @endforeach
+    </div>
+    <div class="form-group mt-5">
         <span class='text-primary'>Select image to upload</span><br><br>
         <input type="file" name="image">
         @error('image'){{$message}}@enderror
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Add</button>
+    <button type="submit" class="btn btn-primary mt-3 mb-5">Add</button>
 </form>
 @endsection
