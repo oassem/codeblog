@@ -20,7 +20,7 @@ Create Post
     <div class="form-group mt-4">
         <span class='text-primary'>Select tags</span><br>
         @foreach($tags as $tag)
-        <input type="checkbox" class="mr-2" name="tags[]" value="{{$tag->id}}">{{$tag->name}}
+        <input type="checkbox" class="mr-2" name="tags[]" value="{{$tag->id}}" <?php if (!empty(old('tags'))) if (in_array($tag->id, old('tags'))) echo 'checked' ?>>{{$tag->name}}
         <span class='mr-4'></span>
         @endforeach
     </div>
