@@ -14,7 +14,7 @@ Edit Post
     </div>
     <div class="mb-5">
         <label for="exampleFormControlTextarea1" class="form-label text-primary">Post Content</label>
-        <input type="text" name="body" class="form-control" id="exampleFormControlInput1" placeholder="content" value="{{old('body',$post->body)}}">
+        <textarea class="form-control" name="body" rows="3" placeholder="content">{{old('body',$post->body)}}</textarea>
         @error('body'){{$message}}@enderror
     </div>
     <div class="form-group mt-4">

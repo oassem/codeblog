@@ -17,7 +17,7 @@ Searched Posts
                     </a>
                     <p class="card-text" style="height:230px;">{{$post->body}}</p>
                 </div>
-                <a href="{{url('posts/edit',$post->id)}}" class="btn btn-warning mx-3">Edit</a><br />
+                <a href="{{url('posts/edit',$post->id)}}" class="btn btn-secondary mx-3">Edit</a><br />
                 <a href="{{url('posts/delete',$post->id)}}" class="btn btn-danger mx-3 mb-2">Delete</a>
             </div>
         </div>
