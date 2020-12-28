@@ -95,18 +95,20 @@ class PostController extends Controller
             [
                 'title' => 'required|max:50|min:3',
                 'body' => 'required|max:500|min:10',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]
         );
         if ($validator->fails()) {
             return redirect('posts/edit/' . $id)->withErrors($validator)->withInput();
         }
         $img = $request->file('image');
-        $img->move(base_path('public\images'), $img->getClientOriginalName());
         $post = Post::find($id);
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->image = $img->getClientOriginalName();
+        if (!empty($img)) {
+            $img->move(base_path('public\images'), $img->getClientOriginalName());
+            $post->image = $img->getClientOriginalName();
+        }
         $post->tags()->sync($request->tags);
         $post->save();
         return redirect('posts');
